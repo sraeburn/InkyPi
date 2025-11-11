@@ -52,15 +52,10 @@ class Quote(BasePlugin):
 
         prompt_response = "“Very little is needed to make a happy life; it is all within yourself, in your way of thinking.” — Marcus Aurelius"
 
-        # image_template_params = {
-        #     "title": title,
-        #     "content": prompt_response,
-        #     "plugin_settings": settings
-        # }
-
         image_template_params = {
             "title": title,
-            "content": prompt_response
+            "content": prompt_response,
+            "plugin_settings": settings
         }
         
         image = self.render_image(dimensions, "quote.html", "quote.css", image_template_params)
