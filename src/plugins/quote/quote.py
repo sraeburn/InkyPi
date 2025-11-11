@@ -51,7 +51,12 @@ class Quote(BasePlugin):
             dimensions = dimensions[::-1]
 
         # prompt_response = "“Very little is needed to make a happy life; it is all within yourself, in your way of thinking.” — Marcus Aurelius"
-        prompt_response = "\u003Cblockquote\u003E&ldquo;Instead of being intimidated by the limitations, be inspired to find new ways around them.&rdquo; &mdash; \u003Cfooter\u003ERalph Marston\u003C/footer\u003E\u003C/blockquote\u003E"
+        # prompt_response = "\u003Cblockquote\u003E&ldquo;Instead of being intimidated by the limitations, be inspired to find new ways around them.&rdquo; &mdash; \u003Cfooter\u003ERalph Marston\u003C/footer\u003E\u003C/blockquote\u003E"
+
+
+        url = "https://zenquotes.io/api/quotes"
+        response = requests.get(url)
+        prompt_response = response.json()[0]["h"]
 
         image_template_params = {
             "title": title,
