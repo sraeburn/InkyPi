@@ -12,7 +12,7 @@ import os
 
 logger = logging.getLogger(__name__)
 
-class AIText(BasePlugin):
+class Quote(BasePlugin):
     # def generate_settings_template(self):
     #     template_params = super().generate_settings_template()
     #     template_params['api_key'] = {
@@ -63,43 +63,43 @@ class AIText(BasePlugin):
             "content": prompt_response
         }
         
-        image = self.render_image(dimensions, "ai_text.html", "ai_text.css", image_template_params)
+        image = self.render_image(dimensions, "quote.html", "quote.css", image_template_params)
 
         return image
     
-    @staticmethod
-    def fetch_text_prompt(ai_client, model, text_prompt):
-        logger.info(f"Getting random text prompt from input {text_prompt}, model: {model}")
+    # @staticmethod
+    # def fetch_text_prompt(ai_client, model, text_prompt):
+    #     logger.info(f"Getting random text prompt from input {text_prompt}, model: {model}")
 
-        system_content = (
-            "You are a highly intelligent text generation assistant. Generate concise, "
-            "relevant, and accurate responses tailored to the user's input. The response "
-            "should be 70 words or less."
-            "IMPORTANT: Do not rephrase, reword, or provide an introduction. Respond directly "
-            "to the request without adding explanations or extra context "
-            "IMPORTANT: If the response naturally requires a newline for formatting, provide "
-            "the '\n' newline character explicitly for every new line. For regular sentences "
-            "or paragraphs do not provide the new line character."
-            f"For context, today is {datetime.today().strftime('%Y-%m-%d')}"
-        )
-        user_content = text_prompt
+    #     system_content = (
+    #         "You are a highly intelligent text generation assistant. Generate concise, "
+    #         "relevant, and accurate responses tailored to the user's input. The response "
+    #         "should be 70 words or less."
+    #         "IMPORTANT: Do not rephrase, reword, or provide an introduction. Respond directly "
+    #         "to the request without adding explanations or extra context "
+    #         "IMPORTANT: If the response naturally requires a newline for formatting, provide "
+    #         "the '\n' newline character explicitly for every new line. For regular sentences "
+    #         "or paragraphs do not provide the new line character."
+    #         f"For context, today is {datetime.today().strftime('%Y-%m-%d')}"
+    #     )
+    #     user_content = text_prompt
 
-        # Make the API call
-        response = ai_client.chat.completions.create(
-            model=model,
-            messages=[
-                {
-                    "role": "system",
-                    "content": system_content
-                },
-                {
-                    "role": "user",
-                    "content": user_content
-                }
-            ],
-            temperature=1
-        )
+    #     # Make the API call
+    #     response = ai_client.chat.completions.create(
+    #         model=model,
+    #         messages=[
+    #             {
+    #                 "role": "system",
+    #                 "content": system_content
+    #             },
+    #             {
+    #                 "role": "user",
+    #                 "content": user_content
+    #             }
+    #         ],
+    #         temperature=1
+    #     )
 
-        prompt = response.choices[0].message.content.strip()
-        logger.info(f"Generated random text prompt: {prompt}")
-        return prompt
+    #     prompt = response.choices[0].message.content.strip()
+    #     logger.info(f"Generated random text prompt: {prompt}")
+    #     return prompt
